@@ -41,24 +41,44 @@ router.get("/search", async (req, res) => {
         if (!name) {
             return res.redirect("/"); // Redirect to home if no search query
         }
-        
-        // First get the full list (limited to what's in the API_URL)
-        const listResponse = await axios.get(API_URL);
-        const allPokemon = listResponse.data.results;
-        
-        // Filter Pokemon by name (case-insensitive)
-        const filteredPokemon = allPokemon.filter(pokemon => 
-            pokemon.name.toLowerCase().includes(name.toLowerCase())
-        );
-        
-        res.render("pages/home", {
-            pokemonList: filteredPokemon,
-            searchQuery: name
-        });
+
+        const respone = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
+        res.render("pages/details", { pokemon: respone.data });
     } catch (error) {
-        console.error("Search error:", error);
         res.status(500).send("Error searching for pokemon");
     }
 });
+
+//wildcard route
+
+router.use(async (req, res) => {
+    try {
+        res.status(404).send(`404 not found`);
+    }
+    catch (error) {
+        console.error("Wildcard route error:", error);
+        res.status(500).send("Error fetching pokemon data");
+    }
+});
+
+
+//         // First get the full list (limited to what's in the API_URL)
+//         const listResponse = await axios.get(API_URL);
+//         const allPokemon = listResponse.data.results;
+        
+//         // Filter Pokemon by name (case-insensitive)
+//         const filteredPokemon = allPokemon.filter(pokemon => 
+//             pokemon.name.toLowerCase().includes(name.toLowerCase())
+//         );
+        
+//         res.render("pages/home", {
+//             pokemonList: filteredPokemon,
+//             searchQuery: name
+//         });
+//     } catch (error) {
+//         console.error("Search error:", error);
+//         res.status(500).send("Error searching for pokemon");
+//     }
+// });
 
 export default router;
