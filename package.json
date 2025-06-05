@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "axios": "^1.9.0",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  },
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "A pokedex application built with Node.js and Express, fetching data from the PokeAPI.",
+  "main": "server.js",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaelm200314/pokedex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/rafaelm200314/pokedex/issues"
+  },
+  "homepage": "https://github.com/rafaelm200314/pokedex#readme"
+}
